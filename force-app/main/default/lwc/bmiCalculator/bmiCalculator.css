@@ -1,0 +1,274 @@
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.app {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(/sfsites/c/resource/BmiAppBackground);
+    background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    padding: 15px;
+}
+
+.box {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    max-width: 700px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+}
+
+form {
+    padding: 30px 25px;
+    background: black;
+    color: white;
+}
+
+form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.custom-button {
+    width: 100%;
+    padding: 6px 0;
+    /* smaller height */
+    font-size: 14px;
+    /* smaller font */
+    font-weight: 600;
+    border: none;
+    border-radius: 20px;
+    /* slightly rounded */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+.custom-button.calculate {
+    background: linear-gradient(90deg, #4caf50, #66bb6a);
+    color: white;
+}
+
+.custom-button.calculate:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+
+.custom-button.clear {
+    background: linear-gradient(90deg, #f44336, #ef5350);
+    color: white;
+}
+
+.custom-button.clear:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+/* BMI Information Section */
+.slds-p-around_large {
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 0 0 15px 15px;
+}
+
+.slds-text-heading_medium {
+    font-size: 24px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.slds-text-body_regular {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #3e3e3c;
+}
+
+.slds-text-heading_small {
+    font-size: 20px;
+    letter-spacing: 0.3px;
+}
+
+/* BMI Categories List */
+.slds-list_vertical {
+    list-style: none;
+    margin: 10px;
+    padding: 0;
+}
+
+.slds-item.slds-box {
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.slds-item.slds-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Category-specific styling */
+.slds-item.slds-box:first-child {
+    background: #f3f3f3;
+    border-color: #d8d8d8;
+}
+
+.slds-item.slds-box:first-child:hover {
+    background: #e8e8e8;
+}
+
+.slds-theme_success {
+    background: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.slds-theme_success:hover {
+    background: #c1e7cd;
+}
+
+.slds-text-color_success {
+    color: #155724;
+}
+
+.slds-theme_warning {
+    background: #fff3cd;
+    border-color: #ffeaa7;
+}
+
+.slds-theme_warning:hover {
+    background: #ffe8a1;
+}
+
+.slds-theme_warning .slds-text-body_regular {
+    color: #856404;
+}
+
+/* Obesity category with custom background */
+.slds-item[style*="background-color: #c23934"] {
+    border-color: #a12f29;
+}
+
+.slds-item[style*="background-color: #c23934"]:hover {
+    background-color: #d64540 !important;
+    box-shadow: 0 6px 16px rgba(194, 57, 52, 0.3);
+}
+
+/* Text styling */
+.slds-text-title_bold {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .slds-text-heading_medium {
+        font-size: 20px;
+    }
+
+    .slds-text-heading_small {
+        font-size: 18px;
+    }
+
+    .slds-text-title_bold {
+        font-size: 14px;
+    }
+
+    .slds-p-around_large {
+        padding: 20px !important;
+    }
+
+    .slds-item.slds-box {
+        padding: 15px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .slds-text-heading_medium {
+        font-size: 18px;
+    }
+
+    .slds-text-heading_small {
+        font-size: 16px;
+    }
+
+    .slds-text-body_regular {
+        font-size: 14px;
+    }
+
+    .slds-text-title_bold {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .slds-grid.slds-gutters {
+        flex-direction: column;
+    }
+
+    .slds-col {
+        margin-bottom: 6px;
+    }
+}
+
+.resultBox {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+    backdrop-filter: blur(10px);
+}
+
+.resultBox h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.resultBox h4 {
+    font-size: 17px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .box {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+    }
+
+    form {
+        padding: 25px 20px;
+    }
+
+    form h2 {
+        font-size: 22px;
+    }
+}
