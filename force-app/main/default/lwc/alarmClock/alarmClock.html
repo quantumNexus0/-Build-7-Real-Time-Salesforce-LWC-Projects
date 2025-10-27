@@ -1,0 +1,53 @@
+<template>
+  <div class="alarm-card">
+    <h1 class="slds-text-align_center">Alarm Clock</h1>
+    <img src={clockImage} alt="Clock Image" class={shakeImage} style="width:200px;height:200px; margin-top: 10px;" />
+    <h2>{currentTime}</h2>
+
+    <div class="slds-grid slds-gutters">
+      <div class="slds-col">
+        <c-clock-dropdown
+          label="Hour(s)"
+          options={hours}
+          unique-id="select-hour"
+          onoptionselect={optionhandler}>
+        </c-clock-dropdown>
+      </div>
+      <div class="slds-col">
+        <c-clock-dropdown
+          label="Minute(s)"
+          options={minutes}
+          unique-id="select-minute"
+          onoptionselect={optionhandler}>
+        </c-clock-dropdown>
+      </div>
+      <div class="slds-col">
+        <c-clock-dropdown
+          label="AM/PM"
+          options={ampmOptions}
+          unique-id="select-ampm"
+          onoptionselect={optionhandler}>
+        </c-clock-dropdown>
+      </div>
+    </div>
+
+    
+    <template if:false={isAlarmSet}>
+      <button
+        class={setButtonClass}
+        disabled={isfieldNotSelected}
+        onclick={setAlarmHandler}>
+        Set Alarm
+      </button>
+    </template>
+
+   
+    <template if:true={isAlarmSet}>
+      <button
+        class="slds-button slds-button_destructive slds-button_stretch"
+        onclick={clearAlarmHandler}>
+        Clear Alarm
+      </button>
+    </template>
+  </div>
+</template>

@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:host() {
+    --dark-blue: #243356;
+    --light-blue: #4ea1f3; 
+}
+
+.custom-label {
+    color: var(--light-blue);
+}
+
+.custom-select {
+    color: var(--dark-blue);
+}
