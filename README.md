@@ -1,31 +1,42 @@
-# 🏋️ BMI Calculator - Salesforce LWC Project
+# 🚀 Build 7 Real-Time Salesforce LWC Projects
 
-A modern, responsive Body Mass Index (BMI) Calculator built with Salesforce Lightning Web Components (LWC). This application helps users calculate their BMI and understand their health category based on WHO standards.
+A comprehensive collection of modern, responsive Salesforce Lightning Web Components (LWC) projects. This repository showcases practical implementations of real-world applications built with Salesforce LWC.
 
-## 🔗 Live Demo
+## 📚 Projects Overview
+
+### Day 1 - Project 1: BMI Calculator 🏋️
 **[View Live Application](https://vipulportfolio-dev-ed.develop.my.site.com/bmi-calculator)**
 
-## 📸 Screenshots
-![BMI Calculator Interface](screenshots/bmi-calculator.png)
+A modern Body Mass Index (BMI) Calculator that helps users calculate their BMI and understand their health category based on WHO standards.
 
-## ✨ Features
+**Key Features:**
+- Real-time BMI calculation based on height (cm) and weight (kg)
+- Health category classification (Underweight, Normal, Overweight, Obesity)
+- Responsive glassmorphism design with smooth animations
+- Input validation and clear functionality
+- Educational content with color-coded indicators
 
-- **Real-time BMI Calculation**: Instantly calculates BMI based on height (cm) and weight (kg)
-- **Health Category Classification**: Displays BMI category (Underweight, Normal, Overweight, Obesity)
-- **Responsive Design**: Fully responsive layout that works seamlessly on desktop, tablet, and mobile devices
-- **Interactive UI**: Modern glassmorphism design with smooth animations and hover effects
-- **Input Validation**: Ensures proper data entry with required field validation
-- **Educational Content**: Includes comprehensive BMI category information with color-coded indicators
-- **Clear Functionality**: Easy reset button to clear inputs and start fresh
+**Tech Stack:** LWC, SLDS, HTML5, CSS3, JavaScript (ES6+), Experience Cloud
 
-## 🎯 BMI Categories
+---
 
-| Category | BMI Range | Visual Indicator |
-|----------|-----------|------------------|
-| Underweight | BMI < 18.5 | Gray |
-| Normal Weight | 18.5 ≤ BMI < 24.9 | Green |
-| Overweight | 25 ≤ BMI < 29.9 | Yellow |
-| Obesity | BMI ≥ 30 | Red |
+### Day 2 - Project 2: Alarm Clock ⏰
+**[View Live Application](https://vipulportfolio-dev-ed.develop.my.site.com/alarm-clock)**
+
+A fully functional alarm clock application with set, clear, and animation features, along with ringtone functionality.
+
+**Key Features:**
+- Set alarm functionality with time picker
+- Clear alarm functionality
+- Animation on alarm trigger
+- Google shake on large screen for alert
+- Ringtone integration for alarm notifications
+- Real-time clock display
+- Responsive design for all devices
+
+**Tech Stack:** LWC, SLDS, HTML5, CSS3, JavaScript (ES6+), Experience Cloud
+
+---
 
 ## 🛠️ Technologies Used
 
@@ -41,13 +52,19 @@ A modern, responsive Body Mass Index (BMI) Calculator built with Salesforce Ligh
 ```
 force-app/main/default/
 ├── lwc/
-│   └── bmiCalculator/
-│       ├── bmiCalculator.html          # Component template
-│       ├── bmiCalculator.js            # Component logic
-│       ├── bmiCalculator.css           # Component styles
-│       └── bmiCalculator.js-meta.xml   # Component metadata
+│   ├── bmiCalculator/
+│   │   ├── bmiCalculator.html
+│   │   ├── bmiCalculator.js
+│   │   ├── bmiCalculator.css
+│   │   └── bmiCalculator.js-meta.xml
+│   └── alarmClock/
+│       ├── alarmClock.html
+│       ├── alarmClock.js
+│       ├── alarmClock.css
+│       └── alarmClock.js-meta.xml
 └── staticresources/
-    └── BmiAppBackground.png            # Background image
+    ├── BmiAppBackground.png
+    └── AlarmRingtone.mp3
 ```
 
 ## 🚀 Installation & Setup
@@ -78,14 +95,34 @@ force-app/main/default/
 4. **Create Experience Cloud Site** (Optional - for public access)
    - Navigate to Setup → Digital Experiences → All Sites
    - Create a new site or use existing
-   - Add the BMI Calculator component to the site page
+   - Add the components to the site pages
    - Publish the site
 
-5. **Add Component to Lightning Page**
+5. **Add Components to Lightning Page**
    - Go to App Builder
    - Edit or create a Lightning page
-   - Drag and drop the `bmiCalculator` component
+   - Drag and drop the components
    - Save and activate
+
+## 📸 Screenshots
+
+### BMI Calculator
+![BMI Calculator Interface](screenshots/bmi-calculator.png)
+
+### Alarm Clock
+![Alarm Clock Interface](screenshots/alarm-clock.png)
+
+## 🎓 Learning Outcomes
+
+Through this project series, you'll learn:
+- Building interactive LWC components
+- Implementing real-time calculations and updates
+- Creating responsive designs with SLDS and custom CSS
+- Working with static resources (images, audio files)
+- Deploying components to Experience Cloud
+- Form validation and user input handling
+- State management in LWC
+- Animation and transition effects
 
 ## 🤝 Contributing
 
@@ -117,6 +154,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 If you have any questions or run into issues, please open an issue on GitHub or reach out via LinkedIn.
+
+## 🗓️ Project Timeline
+
+- **Day 1:** BMI Calculator
+- **Day 2:** Alarm Clock
+- **Coming Soon:** 5 More Projects!
 
 ---
 
