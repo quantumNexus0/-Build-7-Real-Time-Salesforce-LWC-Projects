@@ -38,6 +38,29 @@ A fully functional alarm clock application with set, clear, and animation featur
 
 ---
 
+### Day 3 - Project 3: Currency Converter 💱
+**[View Live Application](https://vipulportfolio-dev-ed.develop.my.site.com/currency-converter)**
+
+A real-time currency converter with live exchange rates powered by ExchangeRate-API. Convert between multiple currencies with up-to-date exchange rates.
+
+**Key Features:**
+- Real-time currency conversion with live exchange rates
+- Support for 150+ currencies worldwide
+- Modern, intuitive user interface with glassmorphism design
+- Instant conversion calculations
+- Responsive design for all devices
+- Error handling and loading states
+- External API integration with ExchangeRate-API
+
+**Tech Stack:** LWC, SLDS, HTML5, CSS3, JavaScript (ES6+), REST API Integration, Experience Cloud
+
+**API Integration:**
+- ExchangeRate-API v6 for real-time exchange rates
+- Secure API key management
+- Remote Site Settings and CSP Trusted Sites configuration
+
+---
+
 ## 🛠️ Technologies Used
 
 - **Salesforce Lightning Web Components (LWC)**
@@ -45,6 +68,7 @@ A fully functional alarm clock application with set, clear, and animation featur
 - **HTML5**
 - **CSS3** (Custom styling with glassmorphism effects)
 - **JavaScript (ES6+)**
+- **REST API Integration**
 - **Experience Cloud** (for public site deployment)
 
 ## 📁 Project Structure
@@ -57,11 +81,16 @@ force-app/main/default/
 │   │   ├── bmiCalculator.js
 │   │   ├── bmiCalculator.css
 │   │   └── bmiCalculator.js-meta.xml
-│   └── alarmClock/
-│       ├── alarmClock.html
-│       ├── alarmClock.js
-│       ├── alarmClock.css
-│       └── alarmClock.js-meta.xml
+│   ├── alarmClock/
+│   │   ├── alarmClock.html
+│   │   ├── alarmClock.js
+│   │   ├── alarmClock.css
+│   │   └── alarmClock.js-meta.xml
+│   └── currencyConverter/
+│       ├── currencyConverter.html
+│       ├── currencyConverter.js
+│       ├── currencyConverter.css
+│       └── currencyConverter.js-meta.xml
 └── staticresources/
     ├── BmiAppBackground.png
     └── AlarmRingtone.mp3
@@ -73,6 +102,7 @@ force-app/main/default/
 - Salesforce Developer Org or Sandbox
 - Salesforce CLI installed
 - VS Code with Salesforce Extensions
+- ExchangeRate-API account (free tier available)
 
 ### Steps
 
@@ -87,22 +117,86 @@ force-app/main/default/
    sf org login web --alias myDevOrg
    ```
 
-3. **Deploy to Salesforce**
+3. **Set Up ExchangeRate-API (For Currency Converter)**
+   
+   a. Create an account at [ExchangeRate-API](https://app.exchangerate-api.com/sign-up)
+   
+   b. After logging in, go to the dashboard and copy your API_KEY
+   
+   c. Update the API_KEY in `currencyConverter.js`:
+   ```javascript
+   async convert(){
+     const API_KEY = 'YOUR_API_KEY_HERE' // Replace with your API key
+     const API_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/pair/${this.countryFrom}/${this.countryTo}`
+     
+     try{
+       const data = await fetch(API_URL)
+       const jsonData = await data.json()
+       this.result = (Number(this.amount) * jsonData.conversion_rate).toFixed(2)
+       console.log(this.result)
+     } catch(error){
+       console.log(error)
+       this.error = "An error occurred. Please try again..."
+     }
+   }
+   ```
+
+4. **Configure Remote Site Settings**
+   - Navigate to Setup → Security → Remote Site Settings
+   - Click "New Remote Site"
+   - Enter the following details:
+     - **Remote Site Name:** ExchangeRateAPI
+     - **Remote Site URL:** `https://v6.exchangerate-api.com/`
+     - **Active:** Checked
+   - Click "Save"
+
+5. **Configure CSP Trusted Sites**
+   - Navigate to Setup → Security → CSP Trusted Sites
+   - Click "New Trusted Site"
+   - Enter the following details:
+     - **Trusted Site Name:** ExchangeRateAPI
+     - **Trusted Site URL:** `https://v6.exchangerate-api.com`
+     - **Active:** Checked
+     - **Context:** All (or select specific contexts as needed)
+   - Click "Save"
+
+6. **Deploy to Salesforce**
    ```bash
    sf project deploy start --target-org myDevOrg
    ```
 
-4. **Create Experience Cloud Site** (Optional - for public access)
+7. **Create Experience Cloud Site** (Optional - for public access)
    - Navigate to Setup → Digital Experiences → All Sites
    - Create a new site or use existing
    - Add the components to the site pages
+   - Go to Builder → Settings → Advanced
+   - Add CSP Trusted Sites in Experience Cloud:
+     - Click on "Content Security Policy"
+     - Add `https://v6.exchangerate-api.com` to trusted sites
    - Publish the site
 
-5. **Add Components to Lightning Page**
+8. **Add Components to Lightning Page**
    - Go to App Builder
    - Edit or create a Lightning page
    - Drag and drop the components
    - Save and activate
+
+## 🔄 API Migration Notice
+
+**Important:** The previous API (`https://api.exchangerate.host`) is no longer working. This project has been updated to use the new ExchangeRate-API v6.
+
+### Changes Made:
+- **Old API Endpoint:** `https://api.exchangerate.host/convert?access_key=${AUTH_KEY}&from=${this.countryFrom}&to=${this.countryTo}`
+- **New API Endpoint:** `https://v6.exchangerate-api.com/v6/${API_KEY}/pair/${this.countryFrom}/${this.countryTo}`
+- **Response Property Changed:** `jsonData.result` → `jsonData.conversion_rate`
+
+### Migration Steps:
+1. Sign up at [ExchangeRate-API](https://app.exchangerate-api.com/sign-up)
+2. Get your API key from the dashboard
+3. Update the API_KEY in your code
+4. Update Remote Site Settings
+5. Update CSP Trusted Sites (both in Salesforce Setup and Experience Cloud Builder)
+6. Deploy the updated code
 
 ## 📸 Screenshots
 
@@ -112,6 +206,9 @@ force-app/main/default/
 ### Alarm Clock
 ![Alarm Clock Interface](screenshots/alarm-clock.png)
 
+### Currency Converter
+![Currency Converter Interface](screenshots/currency-converter.png)
+
 ## 🎓 Learning Outcomes
 
 Through this project series, you'll learn:
@@ -119,10 +216,33 @@ Through this project series, you'll learn:
 - Implementing real-time calculations and updates
 - Creating responsive designs with SLDS and custom CSS
 - Working with static resources (images, audio files)
+- **External API integration in Salesforce LWC**
+- **Configuring Remote Site Settings and CSP Trusted Sites**
+- **Handling asynchronous API calls with async/await**
+- **Error handling in API integrations**
 - Deploying components to Experience Cloud
 - Form validation and user input handling
 - State management in LWC
 - Animation and transition effects
+
+## 🔧 Troubleshooting
+
+### Currency Converter API Issues
+
+**Problem:** Currency converter not working or showing errors
+
+**Solutions:**
+1. Verify your API key is correct and active
+2. Check Remote Site Settings includes `https://v6.exchangerate-api.com/`
+3. Verify CSP Trusted Sites configuration in both:
+   - Setup → Security → CSP Trusted Sites
+   - Experience Cloud Builder → Settings → Advanced → Content Security Policy
+4. Check browser console for specific error messages
+5. Ensure you haven't exceeded API rate limits (free tier: 1,500 requests/month)
+
+**Problem:** "Access Denied" or CORS errors
+
+**Solution:** Make sure both Remote Site Settings AND CSP Trusted Sites are properly configured with the correct URL.
 
 ## 🤝 Contributing
 
@@ -149,6 +269,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Salesforce Lightning Design System
 - WHO BMI Standards
+- ExchangeRate-API for providing reliable currency exchange rates
 - Community feedback and contributions
 
 ## 📞 Support
@@ -157,9 +278,10 @@ If you have any questions or run into issues, please open an issue on GitHub or 
 
 ## 🗓️ Project Timeline
 
-- **Day 1:** BMI Calculator
-- **Day 2:** Alarm Clock
-- **Coming Soon:** 5 More Projects!
+- **Day 1:** BMI Calculator ✅
+- **Day 2:** Alarm Clock ✅
+- **Day 3:** Currency Converter ✅
+- **Coming Soon:** 4 More Projects!
 
 ---
 
