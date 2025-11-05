@@ -61,9 +61,35 @@ A real-time currency converter with live exchange rates powered by ExchangeRate-
 
 ---
 
+### Day 4 - Project 4: Weather App ☁️🌤️
+**[View Live Application](#)** *(Coming Soon)*
+
+A comprehensive weather application that provides real-time weather information for any city worldwide using the OpenWeatherMap API.
+
+**Key Features:**
+- Real-time weather data for any city globally
+- Display current temperature, humidity, and wind speed
+- Weather condition icons and descriptions
+- Apex controller for secure server-side API integration
+- Clean and intuitive UI with SLDS components
+- Input validation and error handling
+- Responsive design for all devices
+- Loading states and user feedback
+
+**Tech Stack:** LWC, Apex, SLDS, HTML5, CSS3, JavaScript (ES6+), REST API Integration, Experience Cloud
+
+**API Integration:**
+- OpenWeatherMap API for real-time weather data
+- Server-side Apex controller (WeatherAppController) for secure API calls
+- Remote Site Settings configuration
+- Named Credentials for API key management (recommended)
+
+---
+
 ## 🛠️ Technologies Used
 
 - **Salesforce Lightning Web Components (LWC)**
+- **Apex** (Server-side controller for API integration)
 - **Salesforce Lightning Design System (SLDS)**
 - **HTML5**
 - **CSS3** (Custom styling with glassmorphism effects)
@@ -86,11 +112,19 @@ force-app/main/default/
 │   │   ├── alarmClock.js
 │   │   ├── alarmClock.css
 │   │   └── alarmClock.js-meta.xml
-│   └── currencyConverter/
-│       ├── currencyConverter.html
-│       ├── currencyConverter.js
-│       ├── currencyConverter.css
-│       └── currencyConverter.js-meta.xml
+│   ├── currencyConverter/
+│   │   ├── currencyConverter.html
+│   │   ├── currencyConverter.js
+│   │   ├── currencyConverter.css
+│   │   └── currencyConverter.js-meta.xml
+│   └── weatherApp/
+│       ├── weatherApp.html
+│       ├── weatherApp.js
+│       ├── weatherApp.css
+│       └── weatherApp.js-meta.xml
+├── classes/
+│   ├── WeatherAppController.cls
+│   └── WeatherAppController.cls-meta.xml
 └── staticresources/
     ├── BmiAppBackground.png
     └── AlarmRingtone.mp3
@@ -102,7 +136,8 @@ force-app/main/default/
 - Salesforce Developer Org or Sandbox
 - Salesforce CLI installed
 - VS Code with Salesforce Extensions
-- ExchangeRate-API account (free tier available)
+- ExchangeRate-API account (for Currency Converter)
+- OpenWeatherMap API account (for Weather App)
 
 ### Steps
 
@@ -141,7 +176,28 @@ force-app/main/default/
    }
    ```
 
-4. **Configure Remote Site Settings**
+4. **Set Up OpenWeatherMap API (For Weather App)**
+   
+   a. Create an account at [OpenWeatherMap](https://openweathermap.org/api)
+   
+   b. Sign up for a free API key from your account dashboard
+   
+   c. Update the API key in `WeatherAppController.cls`:
+   ```apex
+   public class WeatherAppController {
+       private static final String API_KEY = 'YOUR_API_KEY_HERE'; // Replace with your API key
+       private static final String API_ENDPOINT = 'https://api.openweathermap.org/data/2.5/weather';
+       
+       @AuraEnabled(cacheable=true)
+       public static String getWeatherData(String cityName) {
+           // Implementation
+       }
+   }
+   ```
+
+5. **Configure Remote Site Settings**
+   
+   **For Currency Converter:**
    - Navigate to Setup → Security → Remote Site Settings
    - Click "New Remote Site"
    - Enter the following details:
@@ -150,7 +206,17 @@ force-app/main/default/
      - **Active:** Checked
    - Click "Save"
 
-5. **Configure CSP Trusted Sites**
+   **For Weather App:**
+   - Click "New Remote Site" again
+   - Enter the following details:
+     - **Remote Site Name:** OpenWeatherMapAPI
+     - **Remote Site URL:** `https://api.openweathermap.org/`
+     - **Active:** Checked
+   - Click "Save"
+
+6. **Configure CSP Trusted Sites**
+   
+   **For Currency Converter:**
    - Navigate to Setup → Security → CSP Trusted Sites
    - Click "New Trusted Site"
    - Enter the following details:
@@ -160,12 +226,21 @@ force-app/main/default/
      - **Context:** All (or select specific contexts as needed)
    - Click "Save"
 
-6. **Deploy to Salesforce**
+   **For Weather App:**
+   - Click "New Trusted Site" again
+   - Enter the following details:
+     - **Trusted Site Name:** OpenWeatherMapAPI
+     - **Trusted Site URL:** `https://api.openweathermap.org`
+     - **Active:** Checked
+     - **Context:** All
+   - Click "Save"
+
+7. **Deploy to Salesforce**
    ```bash
    sf project deploy start --target-org myDevOrg
    ```
 
-7. **Create Experience Cloud Site** (Optional - for public access)
+8. **Create Experience Cloud Site** (Optional - for public access)
    - Navigate to Setup → Digital Experiences → All Sites
    - Create a new site or use existing
    - Add the components to the site pages
@@ -173,41 +248,14 @@ force-app/main/default/
    - Add CSP Trusted Sites in Experience Cloud:
      - Click on "Content Security Policy"
      - Add `https://v6.exchangerate-api.com` to trusted sites
+     - Add `https://api.openweathermap.org` to trusted sites
    - Publish the site
 
-8. **Add Components to Lightning Page**
+9. **Add Components to Lightning Page**
    - Go to App Builder
    - Edit or create a Lightning page
    - Drag and drop the components
    - Save and activate
-
-## 🔄 API Migration Notice
-
-**Important:** The previous API (`https://api.exchangerate.host`) is no longer working. This project has been updated to use the new ExchangeRate-API v6.
-
-### Changes Made:
-- **Old API Endpoint:** `https://api.exchangerate.host/convert?access_key=${AUTH_KEY}&from=${this.countryFrom}&to=${this.countryTo}`
-- **New API Endpoint:** `https://v6.exchangerate-api.com/v6/${API_KEY}/pair/${this.countryFrom}/${this.countryTo}`
-- **Response Property Changed:** `jsonData.result` → `jsonData.conversion_rate`
-
-### Migration Steps:
-1. Sign up at [ExchangeRate-API](https://app.exchangerate-api.com/sign-up)
-2. Get your API key from the dashboard
-3. Update the API_KEY in your code
-4. Update Remote Site Settings
-5. Update CSP Trusted Sites (both in Salesforce Setup and Experience Cloud Builder)
-6. Deploy the updated code
-
-## 📸 Screenshots
-
-### BMI Calculator
-![BMI Calculator Interface](screenshots/bmi-calculator.png)
-
-### Alarm Clock
-![Alarm Clock Interface](screenshots/alarm-clock.png)
-
-### Currency Converter
-![Currency Converter Interface](screenshots/currency-converter.png)
 
 ## 🎓 Learning Outcomes
 
@@ -217,9 +265,12 @@ Through this project series, you'll learn:
 - Creating responsive designs with SLDS and custom CSS
 - Working with static resources (images, audio files)
 - **External API integration in Salesforce LWC**
+- **Server-side API integration using Apex controllers**
 - **Configuring Remote Site Settings and CSP Trusted Sites**
 - **Handling asynchronous API calls with async/await**
 - **Error handling in API integrations**
+- **Working with @AuraEnabled methods**
+- **Cacheable vs non-cacheable Apex methods**
 - Deploying components to Experience Cloud
 - Form validation and user input handling
 - State management in LWC
@@ -243,6 +294,26 @@ Through this project series, you'll learn:
 **Problem:** "Access Denied" or CORS errors
 
 **Solution:** Make sure both Remote Site Settings AND CSP Trusted Sites are properly configured with the correct URL.
+
+### Weather App API Issues
+
+**Problem:** Weather app not fetching data or showing errors
+
+**Solutions:**
+1. Verify your OpenWeatherMap API key is correct and activated (new keys may take a few hours to activate)
+2. Check Remote Site Settings includes `https://api.openweathermap.org/`
+3. Verify CSP Trusted Sites configuration
+4. Check Apex debug logs for detailed error messages
+5. Ensure the city name is spelled correctly
+6. Check API rate limits (free tier: 60 calls/minute, 1,000,000 calls/month)
+
+**Problem:** "Unauthorized" or 401 errors
+
+**Solution:** Double-check that your API key is correctly added to the WeatherAppController class and that it's activated in your OpenWeatherMap account.
+
+**Problem:** Apex callout errors
+
+**Solution:** Ensure Remote Site Settings are properly configured before making HTTP callouts from Apex.
 
 ## 🤝 Contributing
 
@@ -270,6 +341,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Salesforce Lightning Design System
 - WHO BMI Standards
 - ExchangeRate-API for providing reliable currency exchange rates
+- OpenWeatherMap for providing comprehensive weather data
 - Community feedback and contributions
 
 ## 📞 Support
@@ -281,7 +353,8 @@ If you have any questions or run into issues, please open an issue on GitHub or 
 - **Day 1:** BMI Calculator ✅
 - **Day 2:** Alarm Clock ✅
 - **Day 3:** Currency Converter ✅
-- **Coming Soon:** 4 More Projects!
+- **Day 4:** Weather App ✅
+- **Coming Soon:** 3 More Projects!
 
 ---
 
