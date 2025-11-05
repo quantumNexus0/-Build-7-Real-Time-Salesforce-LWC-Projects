@@ -1,3 +1,92 @@
 <template>
-    <h1>Weather App</h1>
+  <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-center app">
+    <div class="slds-card slds-p-around_medium slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3 app-card">
+
+   <header class="header-section slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+  
+  
+  <template if:true={response}>
+    <img 
+      src={arrowBackIcon} 
+      alt="Back Arrow" 
+      onclick={backHandler} 
+      class="back-arrow slds-m-right_medium" 
+    />
+  </template>
+
+  <h1>Weather App</h1>
+</header>
+
+
+
+      <template if:true={loadingText}>
+        <div class={loadingClasses}>{loadingText}</div>
+      </template>
+
+      
+      <template if:true={isError}>
+        <div class="error-msg">{error}</div>
+      </template>
+
+    
+      <template if:false={response}>
+        <section class="section-style">
+          <form onsubmit={submitHandler} class="slds-grid slds-grid_vertical slds-gaps_large">
+            <div class="slds-form-element slds-m-bottom_medium">
+              <input
+                class="input-field"
+                type="text"
+                placeholder="Enter city name"
+                required
+                spellcheck="false"
+                onkeyup={searchHandler}
+              />
+            </div>
+
+            <button
+              type="submit"
+              class="slds-button slds-button_destructive slds-button_stretch slds-m-top_medium"
+            >
+              Get Weather
+            </button>
+          </form>
+        </section>
+      </template>
+
+     
+      <template if:true={response}>
+        <section class="slds-m-around_large slds-text-align_center">
+          <img src={weatherIcon} alt="weather Icon" class="cloud">
+
+          <div class="temperature">
+            <span>{response.temperature}</span><span>°C</span>
+          </div>
+
+          <div class="description">{response.description}</div>
+
+          <div class="location">
+            <img src={mapIcon} alt="map Icon">
+            <span>{response.location}</span>
+          </div>
+        </section>
+
+        <footer class="slds-grid slds-gutters">
+          <div class="slds-col feels_like">
+            <img src={thermometerIcon} alt="Thermometer Icon">
+            <div>{response.feels_like}°C</div>
+            <p>Feels Like</p>
+          </div>
+
+          <div class="vertical-line"></div>
+
+          <div class="slds-col humidity">
+            <img src={dropletIcon} alt="Droplet Icon">
+            <div>{response.humidity}</div>
+            <p>Humidity</p>
+          </div>
+        </footer>
+      </template>
+
+    </div>
+  </div>
 </template>
