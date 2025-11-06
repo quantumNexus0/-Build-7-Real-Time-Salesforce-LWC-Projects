@@ -62,7 +62,7 @@ A real-time currency converter with live exchange rates powered by ExchangeRate-
 ---
 
 ### Day 4 - Project 4: Weather App ☁️🌤️
-**[View Live Application](#)** *(Coming Soon)*
+**[View Live Application](https://vipulportfolio-dev-ed.develop.my.site.com/weather-app)**
 
 A comprehensive weather application that provides real-time weather information for any city worldwide using the OpenWeatherMap API.
 
@@ -75,6 +75,7 @@ A comprehensive weather application that provides real-time weather information 
 - Input validation and error handling
 - Responsive design for all devices
 - Loading states and user feedback
+- **Guest user access enabled for public use without login**
 
 **Tech Stack:** LWC, Apex, SLDS, HTML5, CSS3, JavaScript (ES6+), REST API Integration, Experience Cloud
 
@@ -251,11 +252,35 @@ force-app/main/default/
      - Add `https://api.openweathermap.org` to trusted sites
    - Publish the site
 
-9. **Add Components to Lightning Page**
-   - Go to App Builder
-   - Edit or create a Lightning page
-   - Drag and drop the components
-   - Save and activate
+9. **🔑 Configure Guest User Profile Access (IMPORTANT for Weather App)**
+   
+   **Problem:** Guest users cannot access Apex classes by default in Experience Cloud sites.
+   
+   **Solution:** Follow these steps to enable guest user access to the WeatherAppController:
+   
+   a. Go to **Experience Builder** → Click on the gear icon (⚙️) **Settings** → **General**
+   
+   b. Scroll down and click on **Guest User Profile** link
+   
+   c. In the Profile page, find **Enabled Apex Class Access** section
+   
+   d. Click **Edit** button
+   
+   e. In the Available Apex Classes list, find **weatherAppController**
+   
+   f. Move **weatherAppController** from **Available** to **Enabled** using the arrow buttons
+   
+   g. Click **Save**
+   
+   ✅ **Result:** The Weather App now works perfectly for all users, even without login!
+   
+   **Note:** This step is crucial for any LWC component that uses Apex controllers in Experience Cloud sites accessible to guest users.
+
+10. **Add Components to Lightning Page**
+    - Go to App Builder
+    - Edit or create a Lightning page
+    - Drag and drop the components
+    - Save and activate
 
 ## 🎓 Learning Outcomes
 
@@ -271,6 +296,8 @@ Through this project series, you'll learn:
 - **Error handling in API integrations**
 - **Working with @AuraEnabled methods**
 - **Cacheable vs non-cacheable Apex methods**
+- **Configuring Guest User Profile permissions for Experience Cloud**
+- **Troubleshooting Apex class access issues in public sites**
 - Deploying components to Experience Cloud
 - Form validation and user input handling
 - State management in LWC
@@ -314,6 +341,26 @@ Through this project series, you'll learn:
 **Problem:** Apex callout errors
 
 **Solution:** Ensure Remote Site Settings are properly configured before making HTTP callouts from Apex.
+
+### Guest User Access Issues (Experience Cloud)
+
+**Problem:** Weather App not working for guest users / "You do not have access to the Apex class named 'WeatherAppController'" error
+
+**Solution:** Enable Guest User Profile access to the Apex class:
+1. Go to Experience Builder → Settings → General
+2. Click on Guest User Profile
+3. Find "Enabled Apex Class Access" section
+4. Click Edit
+5. Move weatherAppController from Available to Enabled
+6. Click Save
+
+**Problem:** Changes not reflecting after updating Guest User Profile
+
+**Solution:**
+1. Clear your browser cache
+2. Try accessing the site in incognito/private mode
+3. Wait a few minutes for changes to propagate
+4. Republish your Experience Cloud site
 
 ## 🤝 Contributing
 
@@ -361,3 +408,5 @@ If you have any questions or run into issues, please open an issue on GitHub or 
 ⭐ If you found this project helpful, please give it a star!
 
 **Part of the "Build 7 Real-Time Salesforce LWC Projects" Series**
+
+#Salesforce #LWC #Apex #ExperienceCloud #Trailblazer #WeatherApp #LearningByBuilding #SalesforceDeveloper
