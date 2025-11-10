@@ -8,8 +8,6 @@ public static String getWeatherDetails(String input) {
     return response;
 }
 
-
-   
     public static String getResponse(String url) {
         Http http = new Http();
         HttpRequest request = new HttpRequest();

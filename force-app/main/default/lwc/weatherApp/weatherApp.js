@@ -18,6 +18,23 @@ export default class WeatherApp extends LightningElement {
     weatherDetails; 
     response
     weatherIcon
+
+    // Visibility control
+    showComponent = false;
+    targetPath = '/s/weather-app';
+  connectedCallback() {
+        const currentPath = window.location.pathname;
+        console.log('Current Path:', currentPath);
+
+        // Show component only on the target page
+        if (currentPath === this.targetPath) {
+            this.showComponent = true;
+        } else {
+            this.showComponent = false;
+        }
+    }
+
+
     get loadingClasses() {
         return this.isError ? 'error-msg' : 'success-msg';
     }
