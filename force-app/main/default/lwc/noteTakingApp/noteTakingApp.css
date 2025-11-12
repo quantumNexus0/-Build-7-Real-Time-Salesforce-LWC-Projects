@@ -75,7 +75,7 @@ header h2 {
    padding: 4px 16px;
 }
 
-footer {
+.footer {
     color: var(--white);
     display: flex;
     justify-content: space-between;
@@ -97,4 +97,6 @@ footer {
     gap: 4px;
     align-items: center;
 }
-
+.cursor{
+    cursor: pointer;
+}

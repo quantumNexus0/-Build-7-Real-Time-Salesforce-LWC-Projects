@@ -1,26 +1,72 @@
 <template>
+    <c-notification></c-notification>
     <div class="app">
-        <div class="box box-center">
+        <div class="box box-center" onclick={createNoteHandler}>
             <div class="dotted-circle">
                 <lightning-icon icon-name='utility:add' alternative-text='add' class="custom-icon" 
                 size='large' title='add'></lightning-icon>
             </div>
              <h2>Add New Notes</h2>
         </div>
-        <div class="box slds-var-m-bottom_medium">
-            <header>
-               <h2 class="slds-truncate">Note Heading</h2> 
-            </header>
-            <div class="notes">
-               description text will come here
-            </div>
-<footer>
-    <div class="date">Tue Jan 10 2023</div>
-    <div class="icon-group">
-        <lightning-icon icon-name='action:edit' alternative-text='edit' size='x-small' title='edit note' class="edit-icon"></lightning-icon>
-        <lightning-icon icon-name='action:delete' alternative-text='delete' size='x-small' title='delete note' class="delete-icon"></lightning-icon>
-    </div>
-</footer>
+<template for:each={notesList} for:item="note">
+    <div key={note.Id} class="box slds-var-m-bottom_medium">
+        <header>
+            <h2 class="slds-truncate">{note.Name}</h2>
+        </header>
+
+        <div class="notes">
+            <c-append-html resut={note.Notes_Description__c}></c-append-html>
         </div>
+
+        <footer class="footer">
+            <div class="date">{note.formatedDate}</div>
+            <div class="icon-group">
+                <lightning-icon 
+                    icon-name="action:edit" 
+                    alternative-text="Edit" 
+                    size="x-small" 
+                    title="Edit Note"
+                    class="edit-icon cursor"
+                    data-recordid={note.Id}
+                    onclick={editNoteHandler}>
+                </lightning-icon>
+
+                <lightning-icon 
+                    icon-name="action:delete" 
+                    alternative-text="Delete" 
+                    size="x-small" 
+                    title="Delete Note"
+                    class="delete-icon cursor"
+                    data-recordid={note.Id}
+                    onclick={deleteNoteHandler}>
+                </lightning-icon>
+            </div>
+        </footer>
     </div>
+</template>
+
+    </div>
+
+    <template if:true={showModal}>
+    <c-modal>
+        <h1 slot="header" class="slds-modal__title">{ModalName}</h1>
+        <form>
+           <lightning-input type="text" label="Title"  name="Name" value={noteRecord.Name} class="slds-m-bottom_medium" onchange={changeHandler}></lightning-input>
+           <lightning-input-rich-text 
+               value={noteRecord.Notes_Description__c}
+               onchange={changeHandler} 
+               label="Description" 
+               name="Notes_Description__c" 
+               class="slds-m-bottom_medium"
+               formats={formats}
+               label-visible
+               >
+            </lightning-input-rich-text>
+        </form>
+        <div slot="footer">
+            <button class="slds-button slds-button_neutral" onclick={closeModalHandler}>Cancel</button>
+            <button class="slds-button slds-button_brand" onclick={formsubmitHandler} disabled={isFormInvalid}>{ModalName}</button>
+        </div>
+    </c-modal>
+    </template>
 </template>
