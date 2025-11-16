@@ -1,0 +1,43 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Portfolio Banner</masterLabel>
+    <description>A simple portfolio banner component</description>
+
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+
+    <targetConfig targets="lightningCommunity__Page, lightningCommunity__Default">
+        <property name="recordId" type="String" label="Record ID"/>
+        <property name="linkedinUrl" type="String" label="LinkedIn URL"/>
+        <property name="githubUrl" type="String" label="GitHub URL"/>
+        <property name="trailheadUrl" type="String" label="Trailhead URL"/>
+        <property name="bloggerUrl" type="String" label="Blogger URL"/>
+        <property name="instagramUrl" type="String" label="Instagram URL"/>
+    </targetConfig>
+</LightningComponentBundle> -->
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Portfolio Banner</masterLabel>
+    <description>A simple portfolio banner component</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+<target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="recordId" label="Record Id" type="String" />
+            <property name="linkedinUrl" label="Linkedin URL" type="String" />
+            <property name="twitterUrl" label="Twitter URL" type="String" />
+            <property name="trailheadUrl" label="Trailhead URL" type="String" />
+            <property name="githubUrl" label="Github URL" type="String" />
+            <property name="youtuberUrl" label="Youtuber URL" type="String" />
+            <property name="bloggerUrl" label="Blogger URL" type="String" />
+            <property name="instagramUrl" label="Instagram URL" type="String" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

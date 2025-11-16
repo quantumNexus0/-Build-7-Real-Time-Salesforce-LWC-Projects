@@ -1,0 +1,47 @@
+<template>
+    <div class="banner">
+        <img src={userPic} alt="Profile Picture" class="profile-pic"/>
+        <div class="name">{fullName}</div>
+        <div class="designation">{designation} at {companyName}</div>
+        <div class="location">{companyLocation}</div>
+        <div>
+             <template if:true={linkedinUrl}>
+                 <a href={linkedinUrl} target="_blank">
+                <img src={linkedinIcon} class="social-icon"/>
+            </a>
+             </template>
+            <template if:true={youtuberUrl}> 
+                 <a href={youtuberUrl} target="_blank">
+                <img src={youtuberIcon} class="social-icon"/>
+            </a>
+           </template>
+            <template if:true={twitterUrl}>  
+                 <a href={twitterUrl} target="_blank">
+                <img src={twitterIcon} class="social-icon"/>
+            </a>
+            </template>
+            <template if:true={instagramUrl}>  
+                 <a href={instagramUrl} target="_blank">
+                <img src={instagramIcon} class="social-icon"/>
+            </a>
+            </template>
+            <template if:true={githubUrl}>
+                 <a href={githubUrl} target="_blank">
+                <img src={githubIcon} class="social-icon"/>
+            </a>
+           </template>
+            <template if:true={trailheadUrl}> 
+                <a href={trailheadUrl} target="_blank">
+                <img src={trailheadIcon} class="social-icon"/>
+            </a>
+            </template>
+            <template if:true={bloggerUrl}>
+                 <a href={bloggerUrl} target="_blank">
+                <img src={bloggerIcon} class="social-icon"/>
+            </a>
+        </template>  
+              
+        </div>
+    </div>
+    
+</template>
