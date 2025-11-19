@@ -24,3 +24,8 @@
 img{
     height: 350px;
 }
+@media (max-width: 768px) {
+    .card {
+        margin: 12px;
+    }
+}

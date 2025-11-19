@@ -13,14 +13,22 @@
             <c-portfolio-personal-projects record-id={recordId} object-api-name={objectApiName}></c-portfolio-personal-projects>
         </lightning-tab>
         <lightning-tab label="Education">
-            Education Content !
+            <template if:true={recordId}>
+              <c-portfolio-education record-id={recordId} object-api-name={objectApiName} ></c-portfolio-education>
+            </template>
+            
         </lightning-tab>
          <lightning-tab label="Skills">
-            Skills Content !
+            <template if:true={recordId}>
+                <c-portfolio-skills record-id={recordId}></c-portfolio-skills>
+            </template>
+            
         </lightning-tab>
          <lightning-tab label="Work Experience">
-            Work Experience Content !
-        </lightning-tab>
+            <template if:true={recordId}>
+              <c-portfolio-work-experience record-id={recordId} object-api-name={objectApiName}></c-portfolio-work-experience>
+            </template>
+            </lightning-tab>
          <lightning-tab label="Certifications">
             Certifications Content !
         </lightning-tab>
